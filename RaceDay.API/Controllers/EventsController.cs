@@ -10,6 +10,10 @@ namespace RaceDay.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
+    /// <summary>
+    /// Manages CRUD operations for race events.
+    /// </summary>
     public class EventsController : ControllerBase
     {
         private readonly RaceDayDbContext _context;
