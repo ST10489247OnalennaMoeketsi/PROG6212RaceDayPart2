@@ -1,5 +1,8 @@
 ﻿namespace RaceDay.API.Models
 {
+    /// <summary>
+    /// Represents a reusable race category (e.g 5km, 10km., Half Marathon).
+    /// </summary>
     public class EventCategory
     {
         // Composite Primary Key (EventId + CategoryId) will be configured in DbContext
