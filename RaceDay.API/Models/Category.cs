@@ -2,6 +2,9 @@
 
 namespace RaceDay.API.Models
 {
+    /// <summary>
+    /// Represents a reusable race category
+    /// </summary>
     public class Category
     {
         [Key]
