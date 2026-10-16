@@ -27,7 +27,7 @@ namespace RaceDay.API.Data
             base.OnModelCreating(modelBuilder);
 
             // =========================================================
-            // 1. USERS CONFIGURATION
+            // 1. USERS CONFIGURATION (Organisers and Participants)
             // =========================================================
             modelBuilder.Entity<User>(entity =>
             {
