@@ -4,10 +4,9 @@ A RESTful ASP.NET Core Web API for the **RaceDay** event management system. This
 
 ---
 
-## CI/CD Status
+## CI/CD Status Screenshot
 
-![.NET CI Build](<img width="1920" height="1080" alt="Screenshot 2026-10-16 171828" src="https://github.com/user-attachments/assets/a35ad2ee-74a6-409a-a367-9d8d22317ce7" />
-)
+Screenshot 2026-10-16 171828.png
 
 ---
 
