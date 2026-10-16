@@ -10,6 +10,10 @@ namespace RaceDay.API.Controllers
 {
     [Route("api/events/{eventId}/enrolments")]
     [ApiController]
+    
+    /// <summary>
+    /// Handles participant enrolments with composite key validation. 
+    /// </summary>
     public class EnrolmentsController : ControllerBase
     {
         private readonly RaceDayDbContext _context;
