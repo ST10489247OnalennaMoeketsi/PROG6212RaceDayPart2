@@ -2,6 +2,10 @@
 
 namespace RaceDay.API.DTOs
 {
+    
+    /// <summary>
+    /// Data Transfer Object for creating and updating categories.
+    /// </summary>
     public class CategoryDto
     {
         [Required]
