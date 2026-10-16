@@ -70,6 +70,9 @@ namespace RaceDay.API.Controllers
             return Ok(new { Token = token, User = new { user.UserId, user.FirstName, user.LastName, user.Role } });
         }
 
+        /// <summary> 
+        /// Generates a JWT token for the authenticated user.
+        /// </summary>
         private string GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
