@@ -3,6 +3,10 @@
 namespace RaceDay.API.DTOs
 {
     
+    
+    /// <summary>
+    /// Data Transfer Object for creating and updating events.
+    /// </summary>
     public class EventDto
     {
         [Required]
