@@ -9,6 +9,10 @@ namespace RaceDay.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
+    /// <summary>
+    /// Manages CRUD operations for reusable race categories. 
+    /// </summary>
     public class CategoriesController : ControllerBase
     {
         private readonly RaceDayDbContext _context;
