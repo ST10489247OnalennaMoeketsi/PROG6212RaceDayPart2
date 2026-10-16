@@ -104,8 +104,8 @@ In Visual Studio, open Test > Test Explorer and click Run All Tests. All tests s
 
 The same tests are automatically executed via GitHub Actions on every push, as shown by the green build badge at the top of this README.
 
-Video Link
-
+YouTube Video Link:
+https://youtu.be/YAxtmyu4xdM
 
 Project Structure
 text
