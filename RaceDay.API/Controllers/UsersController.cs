@@ -10,6 +10,10 @@ namespace RaceDay.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize] // ALL endpoints in this controller require login
+    
+    /// <summary>
+    /// Handles user profile retrieval and updates for authenticated users.
+    /// </summary>
     public class UsersController : ControllerBase
     {
         private readonly RaceDayDbContext _context;
