@@ -2,6 +2,10 @@
 
 namespace RaceDay.API.DTOs
 {
+    
+    /// <summary>
+    /// Data Transfer Object for user registration.
+    /// </summary>
     public class RegisterDto
     {
         [Required]
