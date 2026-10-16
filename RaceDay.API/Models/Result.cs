@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RaceDay.API.Models
 {
+    /// <summary>
+    /// Stores the final result (finish time, posittion) for a participant's enrolment.
+    /// </summary>
     public class Result
     {
         [Key]
