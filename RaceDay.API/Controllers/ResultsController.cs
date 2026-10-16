@@ -10,6 +10,10 @@ namespace RaceDay.API.Controllers
 {
     [Route("api")]
     [ApiController]
+    
+    /// <summary>
+    /// Handles result capturing by Organisers and viewing by Participants.
+    /// </summary>
     public class ResultsController : ControllerBase
     {
         private readonly RaceDayDbContext _context;
