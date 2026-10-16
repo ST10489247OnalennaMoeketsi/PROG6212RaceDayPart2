@@ -3,6 +3,9 @@ using RaceDay.API.Models;
 
 namespace RaceDay.API.Data
 {
+    /// <summary>
+    /// Database context for the RaceDay system. Configures the schema using Fluent API.
+    /// </summary>
     public class RaceDayDbContext : DbContext
     {
         // The constructor passes configuration options (like the connection string)
