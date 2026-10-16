@@ -13,6 +13,10 @@ namespace RaceDay.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
+    /// <summary>
+    /// Handles user registration and login with JWT authentication.
+    /// </summary>
     public class AuthController : ControllerBase
     {
         private readonly RaceDayDbContext _context;
