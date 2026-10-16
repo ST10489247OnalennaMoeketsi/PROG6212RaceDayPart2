@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RaceDay.API.Models
 {
+    /// <summary>
+    /// Links a Participant to a specific Event and Category combination.
+    /// </summary>
     public class Enrolment
     {
         [Key]
