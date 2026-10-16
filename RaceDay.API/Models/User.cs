@@ -3,7 +3,7 @@
 namespace RaceDay.API.Models
 {
     /// summary 
-    ///Represents a user in the system (Organiser or Participant).
+    ///Represents a User in the system (Organiser or Participant).
     /// </summary>
     public class User
     {
