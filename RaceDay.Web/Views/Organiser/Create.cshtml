@@ -1,0 +1,59 @@
+﻿@model RaceDay.Web.ViewModels.CreateEventViewModel
+@{
+    ViewData["Title"] = "Create Event";
+}
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body">
+                <h3 class="mb-4">Create New Event</h3>
+
+                <!-- ADDED: enctype="multipart/form-data" -->
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="EventName" class="form-label">Event Name</label>
+                        <input asp-for="EventName" class="form-control" />
+                        <span asp-validation-for="EventName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label">Description</label>
+                        <textarea asp-for="Description" class="form-control"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Location" class="form-label">Location</label>
+                        <input asp-for="Location" class="form-control" />
+                        <span asp-validation-for="Location" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="EventDate" class="form-label">Event Date</label>
+                        <input asp-for="EventDate" type="date" class="form-control" />
+                        <span asp-validation-for="EventDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="RegistrationDeadline" class="form-label">Registration Deadline</label>
+                        <input asp-for="RegistrationDeadline" type="date" class="form-control" />
+                        <span asp-validation-for="RegistrationDeadline" class="text-danger"></span>
+                    </div>
+
+                    <!-- ADDED: Image Upload Input -->
+                    <div class="mb-3">
+                        <label asp-for="ImageFile" class="form-label">Event Banner Image</label>
+                        <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Create Event</button>
+                    <a asp-action="Dashboard" class="btn btn-link w-100 mt-2">Back to Dashboard</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

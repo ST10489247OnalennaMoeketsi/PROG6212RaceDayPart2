@@ -1,0 +1,27 @@
+﻿@model IEnumerable<RaceDay.Web.ViewModels.EventViewModel>
+@{
+    ViewData["Title"] = "Upcoming Events";
+}
+
+<h2 class="mb-4">Upcoming Events</h2>
+
+<div class="row">
+    @foreach (var ev in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">@ev.EventName</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@ev.Location</h6>
+                    <p class="card-text">@ev.Description</p>
+                    <p class="mb-1"><strong>Date:</strong> @ev.EventDate.ToString("dd MMM yyyy")</p>
+
+                    <form asp-action="Enrol" method="post" class="mt-3">
+                        <input type="hidden" name="eventId" value="@ev.EventId" />
+                        <button type="submit" class="btn btn-primary w-100">Enrol Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
