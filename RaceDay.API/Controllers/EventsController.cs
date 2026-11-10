@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RaceDay.API.Data;
@@ -8,22 +8,20 @@ using System.Security.Claims;
 
 namespace RaceDay.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    
     /// <summary>
     /// Manages CRUD operations for race events.
     /// </summary>
+    [Route("api/[controller]")]
+    [ApiController]
     public class EventsController : ControllerBase
     {
         private readonly RaceDayDbContext _context;
 
-        public EventsController(RaceDayDbContext context) { _context = context; }
+        public EventsController(RaceDayDbContext context)
+        {
+            _context = context;
+        }
 
-        /// <summary>
-        /// Lists all events available in RaceDay.
-        /// </summary>
-        /// <response code="200">Returns event list.</response>
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> GetEvents()
@@ -39,17 +37,12 @@ namespace RaceDay.API.Controllers
                     e.EventDate,
                     e.RegistrationDeadline,
                     e.Status,
-                    OrganiserName = e.Organiser!.FirstName + " " + e.Organiser.LastName
+                    OrganiserName = e.Organiser != null ? e.Organiser.FirstName + " " + e.Organiser.LastName : "Unknown"
                 }).ToListAsync();
 
             return Ok(events);
         }
 
-        /// <summary>
-        /// Gets one event and its details.
-        /// </summary>
-        /// <response code="200">Returns the event.</response>
-        /// <response code="404">Event not found.</response>
         [HttpGet("{id}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetEvent(int id)
@@ -69,21 +62,14 @@ namespace RaceDay.API.Controllers
                 ev.EventDate,
                 ev.RegistrationDeadline,
                 ev.Status,
-                OrganiserName = ev.Organiser!.FirstName + " " + ev.Organiser.LastName
+                OrganiserName = ev.Organiser != null ? ev.Organiser.FirstName + " " + ev.Organiser.LastName : "Unknown"
             });
         }
 
-        /// <summary>
-        /// Creates an event owned by the logged-in organiser.
-        /// </summary>
-        /// <response code="201">Event created.</response>
-        /// <response code="400">Invalid dates/data.</response>
-        /// <response code="403">User is not an Organiser.</response>
         [HttpPost]
         [Authorize(Roles = "Organiser")]
-        public async Task<IActionResult> CreateEvent(EventDto request)
+        public async Task<IActionResult> CreateEvent([FromForm] EventDto request)
         {
-            // Check: Registration deadline must be before event date
             if (request.RegistrationDeadline > request.EventDate)
                 return BadRequest(new { message = "Registration deadline must be before the event date." });
 
@@ -93,7 +79,7 @@ namespace RaceDay.API.Controllers
             {
                 OrganiserId = organiserId,
                 EventName = request.EventName,
-                Description = request.Description,
+                Description = request.Description ?? string.Empty,
                 Location = request.Location,
                 EventDate = request.EventDate,
                 RegistrationDeadline = request.RegistrationDeadline,
@@ -103,27 +89,26 @@ namespace RaceDay.API.Controllers
             _context.Events.Add(newEvent);
             await _context.SaveChangesAsync();
 
-            return StatusCode(201, newEvent);
+            return StatusCode(201, new
+            {
+                newEvent.EventId,
+                newEvent.EventName,
+                newEvent.Description,
+                newEvent.Location,
+                newEvent.EventDate,
+                newEvent.RegistrationDeadline,
+                newEvent.Status
+            });
         }
 
-        /// <summary>
-        /// Updates an event owned by the organiser.
-        /// </summary>
-        /// <response code="200">Event updated.</response>
-        /// <response code="403">User is not the owner.</response>
-        /// <response code="404">Event not found.</response>
         [HttpPut("{id}")]
         [Authorize(Roles = "Organiser")]
-        public async Task<IActionResult> UpdateEvent(int id, EventDto request)
+        public async Task<IActionResult> UpdateEvent(int id, [FromBody] EventDto request)
         {
             var organiserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
-
             var ev = await _context.Events.FindAsync(id);
             if (ev == null) return NotFound(new { message = "Event not found." });
-
-            // CRITICAL: Only the owner can update their event
             if (ev.OrganiserId != organiserId) return Forbid();
-
             if (request.RegistrationDeadline > request.EventDate)
                 return BadRequest(new { message = "Registration deadline must be before the event date." });
 
@@ -135,30 +120,20 @@ namespace RaceDay.API.Controllers
             ev.Status = request.Status;
 
             await _context.SaveChangesAsync();
-
             return Ok(ev);
         }
 
-        /// <summary>
-        /// Deletes an event owned by the organiser.
-        /// </summary>
-        /// <response code="204">Event deleted.</response>
-        /// <response code="403">User is not the owner.</response>
-        /// <response code="404">Event not found.</response>
         [HttpDelete("{id}")]
         [Authorize(Roles = "Organiser")]
         public async Task<IActionResult> DeleteEvent(int id)
         {
             var organiserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
-
             var ev = await _context.Events.FindAsync(id);
             if (ev == null) return NotFound(new { message = "Event not found." });
-
             if (ev.OrganiserId != organiserId) return Forbid();
 
             _context.Events.Remove(ev);
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
     }
