@@ -131,4 +131,18 @@ Onalenna Mokoetsi — ST10489247
 
 Module: PROG6212 — Programming 2B
 
-a 
+---
+
+# Part 3: MVC Web Application
+
+This repository also contains the Part 3 MVC Web Application (`RaceDay.Web`). This frontend consumes the Part 2 API.
+
+## Part 3 Video Demonstration
+[Watch the Part 3 MVC Web App Demo on YouTube](PASTE_YOUR_NEW_YOUTUBE_LINK_HERE)
+
+## Part 3 Docker Setup
+The MVC application is containerised. To build and run it, use the following commands:
+
+```bash
+docker build -t raceday-web -f RaceDay.Web/Dockerfile .
+docker run -p 8080:80 raceday-web
