@@ -1,4 +1,4 @@
-# RaceDay API - PROG6212 
+# RaceDay API - PROG6212 .
 
 A RESTful ASP.NET Core Web API for the **RaceDay** event management system. This API powers the entire RaceDay platform, handling events, categories, enrolments, results, and user authentication with role-based access control.
 
